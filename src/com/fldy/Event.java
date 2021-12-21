@@ -5,11 +5,13 @@ package com.fldy;
  *
  * @param <E>
  */
-public interface Event<E> {
-    /**
-     * 事件源
-     *
-     * @param e
-     */
-    void source(Emitter<E> e);
+public abstract class Event<E> {
+
+    public E e;
+
+    final void event(E e) {
+        this.e = e;
+    }
+
+    abstract void source();
 }

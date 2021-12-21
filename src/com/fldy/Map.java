@@ -10,7 +10,7 @@ public class Map<E, R> extends Observable<T> {
     /**
      * 事件处理
      */
-    Function<E, R> function;
+    Fun<E, R> function;
     /**
      * 被观察者
      */
@@ -22,7 +22,7 @@ public class Map<E, R> extends Observable<T> {
      * @param o
      * @param f
      */
-    Map(Observable<E> o, Function f) {
+    Map(Observable<E> o, Fun f) {
         this.observable = o;
         this.function = f;
     }
@@ -34,8 +34,8 @@ public class Map<E, R> extends Observable<T> {
      */
     @Override
     protected void subscriptActual(Observer o) {
-        observable.subscript((Observer<E>) t -> {
-            R r = function.apply(t);
+        observable.subscript((Observer<E>) e -> {
+            R r = function.apply(e);
             o.onEvent(r);
         });
     }

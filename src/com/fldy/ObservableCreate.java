@@ -6,10 +6,6 @@ package com.fldy;
  * @param <E>
  */
 public class ObservableCreate<E> extends Observable {
-    /**
-     * 事件
-     */
-    Event<E> e;
 
     /**
      * 创建被观察者
@@ -27,6 +23,11 @@ public class ObservableCreate<E> extends Observable {
      */
     @Override
     protected void subscriptActual(Observer o) {
-        e.source(e -> o.onEvent(e));
+        execute(o);
+    }
+
+    private void execute(Observer o) {
+        e.source();
+        o.onEvent(e.e);
     }
 }

@@ -6,7 +6,7 @@ package com.fldy;
  * @param <E>
  * @param <R>
  */
-public interface Function<E, R> {
+public interface Fun<E, R> {
     /**
      * 处理逻辑
      *

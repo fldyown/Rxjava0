@@ -5,31 +5,14 @@ public class T {
 
         Observable.create(new Event<String>() {
             @Override
-            public void source(Emitter<String> e) {
-                e.onNext("发射事件");
+            void source() {
+                //事件源
+                event("发送数据");
             }
-        }).map(new Function<String, String>() {
-            @Override
-            public String apply(String o) {
-                return o + ":第一次处理";
-            }
-        }).map(new Function<String, String>() {
-            @Override
-            public String apply(String o) {
-                return o + ":第二次处理";
-            }
-        }).map(new Function<String, String>() {
-            @Override
-            public String apply(String o) {
-                return o + ":第三次处理";
-            }
-        }).subscript(new Observer<String>() {
-            @Override
-            public void onEvent(String s) {
-                System.out.println(s);
-            }
-        });
-
-
+        })
+                .map((Fun<String, String>) e -> e + ":第一次处理")
+                .map((Fun<String, String>) e -> e + ":第二次处理")
+                .map((Fun<String, String>) e -> e + ":第三次处理")
+                .subscript((Observer<String>) s -> System.out.println(s));
     }
 }

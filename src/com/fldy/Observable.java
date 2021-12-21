@@ -6,6 +6,10 @@ package com.fldy;
  * @param <E>
  */
 public abstract class Observable<E> {
+    /**
+     * 事件
+     */
+    protected Event<E> e;
 
     /**
      * 订阅
@@ -29,6 +33,21 @@ public abstract class Observable<E> {
      * @param e
      * @return
      */
+    public static Observable create(Object e) {
+        return new ObservableCreate(new Event() {
+            @Override
+            void source() {
+                event(e);
+            }
+        });
+    }
+
+    /**
+     * 创建事件
+     *
+     * @param e
+     * @return
+     */
     public static Observable create(Event e) {
         return new ObservableCreate(e);
     }
@@ -40,7 +59,7 @@ public abstract class Observable<E> {
      * @param <R>
      * @return
      */
-    public <R> Observable map(Function<E, R> f) {
+    public <R> Observable map(Fun<E, R> f) {
         return new Map(this, f);
     }
 }
